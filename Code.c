@@ -148,3 +148,48 @@ void castVote() {
     }
     printf("Candidate not found!\n");
 }
+// siddhant singh
+void countVotes() {
+    if (candidates == NULL) {
+        printf("No candidates registered!\n");
+        return;
+    }
+    
+    printf("\nElection Results:\n");
+    CandNode* temp = candidates;
+    int maxVotes = -1;
+    char winner[50] = "";
+    
+    while (temp != NULL) {
+        printf("Candidate ID: %d, Name: %s, Votes: %d\n", temp->cand.id, temp->cand.name, temp->cand.votes);
+        if (temp->cand.votes > maxVotes) {
+            maxVotes = temp->cand.votes;
+            strcpy(winner, temp->cand.name);
+        }
+        temp = temp->next;
+    }
+    
+    if (maxVotes > 0) {
+        printf("Winner: %s with %d votes\n", winner, maxVotes);
+    } else {
+        printf("No votes cast yet.\n");
+    }
+}
+
+// Function to save results to file
+void saveResults() {
+    FILE* file = fopen("election_results.txt", "w");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+    
+    fprintf(file, "Election Results:\n");
+    CandNode* temp = candidates;
+    while (temp != NULL) {
+        fprintf(file, "Candidate ID: %d, Name: %s, Votes: %d\n", temp->cand.id, temp->cand.name, temp->cand.votes);
+        temp = temp->next;
+    }
+    fclose(file);
+    printf("Results saved to file!\n");
+}
