@@ -194,3 +194,56 @@ void saveResults() {
     printf("Results saved to file!\n");
 }
 \\  siddhant singh
+// Main function with menu-driven interface
+int main() {
+    int choice;
+    while (1) {
+        printf("\nVoting System Menu:\n");
+        printf("1. Register Candidate\n");
+        printf("2. Register Voter\n");
+        printf("3. Cast Vote\n");
+        printf("4. Count Votes and Declare Results\n");
+        printf("5. Save Results to File\n");
+        printf("6. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                registerCandidate();
+                break;
+            case 2:
+                registerVoter();
+                break;
+            case 3:
+                castVote();
+                break;
+            case 4:
+                countVotes();
+                break;
+            case 5:
+                saveResults();
+                break;
+            case 6:
+                // Free memory
+                CandNode* cTemp = candidates;
+                while (cTemp != NULL) {
+                    CandNode* next = cTemp->next;
+                    free(cTemp);
+                    cTemp = next;
+                }
+                VoterNode* vTemp = voters;
+                while (vTemp != NULL) {
+                    VoterNode* next = vTemp->next;
+                    free(vTemp);
+                    vTemp = next;
+                }
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
+\\ aman singh chauhan
