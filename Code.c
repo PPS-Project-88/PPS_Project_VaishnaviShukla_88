@@ -148,7 +148,7 @@ void castVote() {
     }
     printf("Candidate not found!\n");
 }
-// siddhant singh
+// Functions to count votes and declare results(uses array for temporary vote counts if needed,but here directly from structures)
 void countVotes() {
     if (candidates == NULL) {
         printf("No candidates registered!\n");
@@ -193,3 +193,4 @@ void saveResults() {
     fclose(file);
     printf("Results saved to file!\n");
 }
+\\  siddhant singh
