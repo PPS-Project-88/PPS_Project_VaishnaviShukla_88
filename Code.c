@@ -111,3 +111,40 @@ void registerVoter() {
     }
     printf("Voter registered successfully!\n");
 }
+// Priyanshu kumar
+void castVote() {
+    int voterId, candId;
+    printf("Enter Voter ID: ");
+    scanf("%d", &voterId);
+    
+    // Find voter
+    VoterNode* voterTemp = voters;
+    while (voterTemp != NULL) {
+        if (voterTemp->voter.id == voterId) {
+            if (voterTemp->voter.voted == 1) {
+                printf("You have already voted!\n");
+                return;
+            }
+            break;
+        }
+        voterTemp = voterTemp->next;
+    }
+    if (voterTemp == NULL) {
+        printf("Voter not found!\n");
+        return;
+    }
+    
+    printf("Enter Candidate ID to vote for: ");
+    scanf("%d", &candId);                                                                   // Find candidate and increment vote
+    CandNode* candTemp = candidates;
+    while (candTemp != NULL) {
+        if (candTemp->cand.id == candId) {
+            candTemp->cand.votes++;
+            voterTemp->voter.voted = 1;
+            printf("Vote cast successfully!\n");
+            return;
+        }
+        candTemp = candTemp->next;
+    }
+    printf("Candidate not found!\n");
+}
